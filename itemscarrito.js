@@ -5,11 +5,11 @@ const moduleName = "itemscarrito"
 function RegisterItemsCarrito(app){
     app.get(`/${moduleName}`, (req, res) => {
         console.log('ejecutando query');
-        const query = `SELECT a.idItem, a.Cantidad, CONCAT(b.Nombre, ' ' ,B.Apellido) AS Usuario,
+        const query = `SELECT a.idItem, a.Cantidad, CONCAT(b.Nombre, ' ' ,b.Apellido) AS Usuario,
         c.Nombre, c.Precio , sum(c.Precio) * sum(a.Cantidad) AS Total,
         a.Carrito_idCarrito, a.Producto_idProducto
-        FROM ${moduleName} a , Usuario b
-        JOIN Producto c , carrito d
+        FROM ${moduleName} a , usuario b
+        JOIN producto c , carrito d
         WHERE d.Usuario_idUsuario = b.idUsuario AND
         a.Producto_idProducto = c.idProducto AND 
         a.Carrito_idCarrito = d.idCarrito 
@@ -29,10 +29,10 @@ function RegisterItemsCarrito(app){
 // -- LISTAR MEDIANTE ID --
     app.get(`/${moduleName}/:id`,(req,res)=>{
         const {id} = req.params;
-        const query = `SELECT a.idItem, a.Cantidad, CONCAT(b.Nombre, ' ' ,B.Apellido) AS Usuario,
+        const query = `SELECT a.idItem, a.Cantidad, CONCAT(b.Nombre, ' ' ,b.Apellido) AS Usuario,
         c.Nombre, c.Precio , sum(c.Precio) * sum(a.Cantidad) AS Total, a.Carrito_idCarrito, a.Producto_idProducto
-        FROM ${moduleName} a , Usuario b
-        JOIN Producto c , carrito d
+        FROM ${moduleName} a , usuario b
+        JOIN producto c , carrito d
         WHERE d.Usuario_idUsuario = b.idUsuario AND
         a.Producto_idProducto = c.idProducto AND 
         a.Carrito_idCarrito = d.idCarrito AND
