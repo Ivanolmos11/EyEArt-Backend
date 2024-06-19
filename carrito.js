@@ -7,7 +7,7 @@ function RegisterCarrito(app){
         console.log('ejecutando query');
         const query = `SELECT a.idCarrito, CONCAT(b.Nombre, ' ' , b.Apellido) AS Nombre 
         FROM ${moduleName} a
-        JOIN Usuario b
+        JOIN usuario b
         WHERE a.Usuario_idUsuario = b.idUsuario
         ORDER BY idCarrito asc;`
         conexion.query(query, (error, resultado) => {
