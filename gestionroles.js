@@ -6,8 +6,8 @@ function RegisterGestionRoles(app){
     app.get(`/${moduleName}`, (req, res) => {
         console.log('ejecutando query');
         const query = `SELECT a.Usuario_idUsuario, a.Rol_idRol, CONCAT(b.Nombre, ' ', b.Apellido) AS Nombre , c.Descripcion
-        FROM ${moduleName} a , Usuario b
-        JOIN Rol c
+        FROM ${moduleName} a , usuario b
+        JOIN rol c
         WHERE  a.Usuario_idUsuario = b.idUsuario AND a.Rol_idRol = c.idRol 
         ORDER BY idUsuario asc;`
         conexion.query(query, (error, resultado) => {
@@ -26,7 +26,7 @@ function RegisterGestionRoles(app){
         const {Usuario_idUsuario} = req.params;
         const query = `SELECT a.Usuario_idUsuario, a.Rol_idRol, CONCAT(b.Nombre, ' ', b.Apellido) AS Nombre
         FROM ${moduleName} a 
-        JOIN Usuario b
+        JOIN usuario b
         ON  a.Usuario_idUsuario = b.idUsuario
         WHERE Usuario_idUsuario = ${Usuario_idUsuario};`;
         conexion.query(query, (error, resultado)=>{
